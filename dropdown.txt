@@ -1,0 +1,378 @@
+   	   <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Account Type:</strong>
+                    <select name="account_type" class="form-control">
+                        <option value="Savings">Savings</option>
+                        <option value="Checking">Checking</option>
+                        <option value="Current">Current</option>
+                    </select>
+                </div>
+            </div>
+
+
+           <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Account Type:</strong>
+                    <select name="account_type" class="form-control" id="gender">
+                        <option value="Savings" @if ($account->type == "Savings" ) {{ 'selected' }} @endif>Savings</option>
+                        <option value="Checking" @if ($account->type == "Checking" ) {{ 'selected' }} @endif>Checking</option>
+                        <option value="Current" @if ($account->type == "Current" ) {{ 'selected' }} @endif>Current</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+		
+  	<div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Choose Customer:</strong>
+                    <select name="customer" class="form-control">
+                        <option style="display:none;"></option>
+                        @foreach ($users as $user)
+                            <option value="{{$user->id}}">{{$user->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+ 	<div class="col-xs-12 col-sm-12 col-md-12">
+
+                <div class="form-group">
+
+                    <strong>Assign Staff:</strong>
+
+                    <select name="staff" class="form-control">
+
+                        <option style="display:none;"></option>
+
+                        @foreach ($staffs as $staff)
+
+                            <option value="{{$staff->id}}">{{$staff->name}}</option>
+
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+        $users = User::whereHas('roles', function($q){$q->whereIn('roles.name', ['customer']);})->get();
+        $staffs = User::whereHas('roles', function($q){$q->whereIn('roles.name', ['staff']);})->get();
+
+
+
+
+	     <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Choose Customer:</strong>
+                    <select name="customer" class="form-control">
+                        @foreach ($users as $user)
+                            @if(old('customer',$proposal->customer_id) == $user->id )
+                            <option value="{{ $user->id }}" selected >{{ $user->name }}</option>
+                                @else
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endif
+                            @endforeach
+                    </select> 
+                </div>
+	   </div>
+
+
+  	<div class="col-xs-12 col-sm-12 col-md-12">
+
+                <div class="form-group">
+
+                    <strong>Assign Staff:</strong>
+ 
+                   <select name="staff" class="form-control">
+
+                        @foreach ($staffs as $staff)
+ 
+                           @if(old('staff',$orders->staff_id) == $staff->id )
+
+                                <option value="{{ $staff->id }}" selected >{{ $staff->name }}</option>
+
+                            @else
+ 
+                               <option value="{{ $staff->id }}">{{ $staff->name }}</option>
+
+                            @endif
+ 
+                       @endforeach
+
+                    </select>
+ 
+                </div>
+ 
+           </div>
+
+
+
+
+
+table
+invoice--user_id to customer_id
+order--user_id to customer_id
+expense--user_id to customer_id
+
+
+ // $comment->ticket_id = DB::getPdo()->lastInsertId();
+
+i........1@
+
+
+
+AXfqTsmJw9gg-J_F38CEmxiAUosIdomo32DjM_ykuVxK8zdRvsT7SKinGzraU5DETWhrgeiU3ALaEB9b
+
+EGQQLDVHWxosdA_bsiq0r8v4FVd-3Q5XhvBsNGFntsGXptVAIhULVNEpzouIos1A6u_ZOSzo2u04-wPc
+
+
+
+
+
+
+
+http://sascafs.com/crm_old
+root@ibw.com
+pass: root
+
+
+https://www.sascafs.com:2083/
+sascafs
+dataims@388
+
+10^100= google
+
+
+
+             <!--@foreach($projects as $project)-->
+
+             <!-- {{ $project->status }}: {{ $project->number }} <br>-->
+ 
+            <!--@endforeach-->
+
+
+
+https://quickadminpanel.com/blog/paypal-payments-in-laravel-the-ultimate-guide/
+
+https://developer.paypal.com/developer/accounts/
+https://www.sandbox.paypal.com/myaccount/home
+
+
+
+ function drawOrderChart()
+ {
+  var data = google.visualization.arrayToDataTable(analytics2);
+  var options = {
+      width: 200,
+      height: 200,
+      title : 'Order',
+      legend: 'none',
+
+  };
+  var chart = new google.visualization.PieChart(document.getElementById('orderchart'));
+  chart.draw(data, options);
+ }
+
+
+
+
+    $invoice = DB::table('invoices')
+            ->select(
+            DB::raw('invoice_no as invoice_no'),
+            DB::raw('count(*) as number'))
+            ->groupBy('invoice_no')
+            ->get();
+
+            $array[] = ['Status', 'Number'];
+            foreach($invoice as $key => $value)
+            {
+            $array[++$key] = [$value->invoice_no, $value->number];
+            }
+            $inv_status =  json_encode($array);   
+
+
+                @if(Auth::user()->hasRole('customer'))
+
+
+                <a class="btn btn-success" href="{{ route('tasks.create') }}"> Create New Task</a>
+ 
+                @endif
+
+
+var options = {
+    titleTextStyle: {
+        color: <string>,    // any HTML string color ('red', '#cc00cc')
+        fontName: <string>, // i.e. 'Times New Roman'
+        fontSize: <number>, // 12, 18 whatever you want (don't specify px)
+        bold: <boolean>,    // true or false
+        italic: <boolean>   // true of false
+    }
+}
+
+
+'.' is used for select class.
+'#' is used for select id.
+
+
+      // for each product
+
+      $('.panel_container .container').each(function() {
+ 
+       var product = $(this),
+ 
+    
+
+      
+
+       quantity = Number(product.find('#quantity').val()), // get quantity
+
+        price = Number(product.find('#price').data('price')), // get price
+
+        total = quantity * price; // calculate product total
+
+        product.find('.sub-total span').text(total); // show product total
+
+        grandTotal += total; // add to grand total
+
+    });
+
+
+
+function calculate() {
+ 
+           
+        var grandTotal = 0;
+ 
+        
+        var quantity = parseInt(('#quantity').val());
+
+        var p_price = parseInt(('#product_price').val());
+
+        var totalpric = parseInt(quantity * p_price);
+ 
+       var grandTotal += totalpric; 
+
+        
+        $( "#total_price" ).text('$'+ totalpric);
+
+        
+        $( "#grand_total" ).text('$'+ grandTotal);
+
+ 
+       
+        
+         }
+ 
+        
+                  
+    	$( "#qty" ).change(function() {
+
+    		calculate();
+    	});
+ 
+           
+       	$( "#total_price" ).change(function() {
+  
+  		calculate();
+    	});
+  
+    	
+       	$( "#grand_total" ).change(function() {
+ 
+   	calculate();
+	
+	    }); 
+    
+
+
+
+
+ var max_fields = 10;
+
+    var wrapper = $(".container1");
+
+    var add_button = $(".add_form_field");
+
+
+    var x = 1;
+    $(add_button).click(function(e) {
+
+        e.preventDefault();
+
+        if (x < max_fields) {
+
+
+            x++;
+ 
+           $(wrapper).append('<div class="form-row"><div class="form-group col-md-3"><strong>Choose Product:</strong><select id="product' + x + '" name="product_id[]" class="form-control"><option style="display:none;"></option>@foreach ($products as $product)<option value="{{$product->id}}" data-value="{{$product->sales_price}}"  >{{$product->product_name}}</option>@endforeach</select></div><div class="form-group col-md-3"><strong>Quantity:</strong><input type="number" step="0" name="quantity[]" class="form-control" placeholder="0"></div><div class="form-group col-md-3"><strong>Product Price:</strong><input type="number" id="product_price" name="product_price[]" class="form-control" placeholder="0.00"></div><div class="form-group col-md-3"><strong>Total Price:</strong><input type="text" id="total_price[]" name="total_price" class="form-control" placeholder="Total Price"></div></div>'); //add input box
+
+        } else {
+ 
+           alert('You Reached the limits')
+ 
+       }
+    });
+
+ 
+
+   $(wrapper).on("click", ".delete", function(e) {
+
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+        })
+
+    <?php for($i=0;$i<10;$i++) { ?>
+ 
+       $("#product"+{{ $i }}).change(function(){
+            alert(1);
+ 
+           alert($('#product[]').attr('data-value'));
+
+        });
+
+    <?php } ?>
+
+
+
+		$('.container2').on('click', '.remove_form_field2', function() {
+
+
+		    $(this).parent().fadeOut(300, function(){
+
+		        $(this).parent().empty();
+
+
+		        return false;
+
+		    });
+
+		  $('.add_form_field1').css("display", "block");  
+ 
+
+		});
+
+
+(for search)
+https://laravel-news.com/eloquent-tips-tricks
+
+
+(for add and remove input field dynamically)
+https://itsolutionstuff.com/post/laravel-dynamically-add-or-remove-input-fields-using-jqueryexample.html
+http://api.jquery.com/prepend/
+https://stackoverflow.com/questions/45060108/laravel-dynamic-dropdown-country-and-state
+
+digital Ocean
+minar0770@gmail.com
+M12345678
+
+icr-wallet
+shamim.ice.ewu@gmail.com
+shamimewu
+
+

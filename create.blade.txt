@@ -1,0 +1,321 @@
+@extends('layouts.app')
+
+
+@section('content')
+
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Add New Order</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('orders.index') }}"> Back</a>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong>There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
+    <form name="add_name" id="add_name" action="{{ route('orders.store') }}" method="POST">
+
+    	@csrf
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Subject:</strong>
+                    <input type="text" name="subject" class="form-control" placeholder="Subject">
+                </div>
+            </div>
+
+            <!--<div class="col-xs-12 col-sm-12 col-md-12">-->
+            <!--    <div class="form-group">-->
+            <!--        <strong>Choose Customer:</strong>-->
+            <!--        <select name="customer" class="form-control">-->
+            <!--            <option style="display:none;"></option>-->
+            <!--            @foreach ($users as $user)-->
+            <!--                <option value="{{$user->id}}">{{$user->name}}</option>-->
+            <!--            @endforeach-->
+            <!--        </select>-->
+            <!--    </div>-->
+            <!--</div>-->
+            
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Amount:</strong>
+                    <input type="number" id="grand_total"  name="amount" class="form-control" placeholder="0.00">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Date of Issue:</strong>
+                    <input type="date" name="issue_date" class="form-control" placeholder="Date of issue">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Assign Staff:</strong>
+                    <select name="staff" class="form-control">
+                        <option style="display:none;"></option>
+                        @foreach ($staffs as $staff)
+                            <option value="{{$staff->id}}">{{$staff->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Open Till:</strong>
+                    <input type="date" name="open_till" class="form-control" placeholder="Open till">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">  
+                    <strong>Details:</strong>
+                    <textarea rows="4" class="form-control" name="details" placeholder="Details"></textarea>
+                </div>
+            </div>
+            
+            {{-- <div class="container1 col-xs-12 col-sm-12 col-md-12" style="display:block;">
+
+                 <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <strong>Choose Product:</strong>
+                        <select name="product_id[]" class="form-control">
+                            <option style="display:none;"></option>
+                            @foreach ($products as $product)
+                                <option value="{{$product->id}}" data-value="{{$product->sales_price}}" >{{$product->product_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                       <div class="form-group col-md-3">
+                            <strong>Quantity:</strong>
+                            <input type="number" step="0" id= "quantity0" name="quantity[]" class="form-control" placeholder="0">
+                        </div>
+                    
+                        <div class="form-group col-md-2">
+                            <strong>Product Price:</strong>
+                            <input type="number" id="product_price0" name="product_price[]" class="form-control" placeholder="0.00">
+                        </div>
+                    
+                        <div class="form-group col-md-2">
+                            <strong>Total Price:</strong>
+                            <input type="text" id="total_price0" name="total_price[]" class="form-control" placeholder="Total Price" >
+                        </div>
+                   
+    			</div>
+    			
+    			<div class="add_form_field1">
+        			 <a class="pull-right" href="#">Add Order &nbsp; 
+                        <span style="font-size:16px; font-weight:bold;">+ </span>
+                    </a>
+    			</div>
+			</div>
+			
+  
+            <div class="container2 col-xs-12 col-sm-12 col-md-12" style="display:none;">
+
+                 <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <strong>Choose Product:</strong>
+                        <select name="product_id0" class="form-control">
+                            <option style="display:none;"></option>
+                            @foreach ($products as $product)
+                                <option value="{{$product->id}}" data-value="{{$product->sales_price}}" >{{$product->product_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                   <div class="form-group col-md-3">
+                        <strong>Quantity:</strong>
+                        <input type="number" step="0" id="quantity0" name="quantity[]" class="form-control" placeholder="0">
+                    </div>
+                
+                    <div class="form-group col-md-2">
+                        <strong>Product Price:</strong>
+                        <input type="number" id="product_price0" name="product_price[]" class="form-control" placeholder="0.00">
+                    </div>
+                
+                    <div class="form-group col-md-2">
+                        <strong>Total Price:</strong>
+                        <input type="text" id="total_price0" name="total_price[]" class="form-control" placeholder="Total Price" >
+                    </div>
+                    
+                    <div class="form-group col-md-2">
+                        <strong></strong><br>
+            			 <a class="remove_form_field1" href="#">Remove &nbsp; 
+                        </a>
+        			</div>
+    			</div>
+    			
+    			<div class="add_form_field2" style="display:none;">
+        			 <a class="pull-right">Add Order &nbsp; 
+                        <span style="font-size:16px; font-weight:bold;">+ </span>
+                    </a>
+    			</div>
+
+			</div>
+			
+			
+			<div class="container3 col-xs-12 col-sm-12 col-md-12" style="display:none;">
+
+                 <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <strong>Choose Product:</strong>
+                        <select name="product_id0" class="form-control">
+                            <option style="display:none;"></option>
+                            @foreach ($products as $product)
+                                <option value="{{$product->id}}" data-value="{{$product->sales_price}}" >{{$product->product_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                   <div class="form-group col-md-3">
+                        <strong>Quantity:</strong>
+                        <input type="number" step="0" id="quantity" name="quantity[]" class="form-control" placeholder="0">
+                    </div>
+                
+                    <div class="form-group col-md-2">
+                        <strong>Product Price:</strong>
+                        <input type="number" id="product_price0" name="product_price[]" class="form-control" placeholder="0.00">
+                    </div>
+                
+                    <div class="form-group col-md-2">
+                        <strong>Total Price:</strong>
+                        <input type="text" id="total_price0" name="total_price[]" class="form-control" placeholder="Total Price" >
+                    </div>
+                    
+                    <div class="form-group col-md-2">
+                        <strong></strong><br>
+            			 <a class="remove_form_field2" href="#">Remove &nbsp; 
+                        </a>
+        			</div>
+    			</div>
+    			
+    			<div class="add_form_field3" style="display:none;">
+        			 <a class="pull-right" href="#">Add Order &nbsp; 
+                        <span style="font-size:16px; font-weight:bold;">+ </span>
+                    </a>
+    			</div>
+
+			</div>
+             --}}
+             
+
+ 
+            
+            
+                        <div class="alert alert-danger print-error-msg" style="display:none">
+                        <ul></ul>
+                        </div>
+            
+            
+                        <div class="alert alert-success print-success-msg" style="display:none">
+                        <ul></ul>
+                        </div>
+                      
+  
+        <div class="table-responsive">                              
+            <div class="container1 col-xs-12 col-sm-12 col-md-12" id="dynamic_field">
+
+                 <div id="input_fields" class="form-row">
+                    <div class="form-group col-md-3">
+                        <strong>Choose Product:</strong>
+                        <select name="product_id[]" class="form-control">
+                            <option style="display:none;"></option>
+                            @foreach ($products as $product)
+                                <option value="{{$product->id}}" data-value="{{$product->sales_price}}" >{{$product->product_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                       <div class="form-group col-md-2">
+                            <strong>Quantity:</strong>
+                            <input type="number" step="0" name="quantity[]" class="form-control" placeholder="0">
+                        </div>
+                    
+                        <div class="form-group col-md-3">
+                            <strong>Product Price:</strong>
+                            <input type="number"  name="product_price[]" class="form-control" placeholder="0.00" data-value="{{$product->sales_price}}">
+                        </div>
+                    
+                        <div class="form-group col-md-2">
+                            <strong>Total Price:</strong>
+                            <input type="text"  name="total_price[]" class="form-control" placeholder="Total Price" >
+                        </div>
+                   
+                </div>
+
+                <div class="add_form_field1">
+                    <button type="button" name="add" id="add" class="btn btn-success">Add More &nbsp; 
+                       <span style="font-size:16px; font-weight:bold;">+ </span>
+                    </button>
+                </div>    
+
+
+            </div>
+
+        </div> 
+ 
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" name="submit" id="submit" class="btn btn-primary" value="Submit">Submit</button>
+            </div>
+
+
+
+    </form>
+    
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <script type="text/javascript">
+        $(document).ready(function(){      
+
+          var i=1;  
+          var max_fields = 5;
+    
+          $('#add').click(function(){  
+            if (i < max_fields) {
+
+               i++;  
+      
+               $('#input_fields').append('<div id="row'+i+'" class="dynamic-added form-row"><div class="form-group col-md-3"><strong>Choose Product:</strong><select id="product' + i+ '" name="product_id[]" class="form-control"><option style="display:none;"></option>@foreach ($products as $product)<option value="{{$product->id}}" data-value="{{$product->sales_price}}"  >{{$product->product_name}}</option>@endforeach</select></div><div class="form-group col-md-2"><strong>Quantity:</strong><input type="number" step="0" name="quantity[]" class="form-control" placeholder="0"></div><div class="form-group col-md-3"><strong>Product Price:</strong><input type="number" id="product_price" name="product_price[]" class="form-control" placeholder="0.00"></div><div class="form-group col-md-2"><strong>Total Price:</strong><input type="text" id="total_price[]" name="total_price" class="form-control" placeholder="Total Price"></div><div class="form-group col-md-2"><strong></strong><br><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></div>'); //add input box
+            }
+        else {
+            alert('You Reached the limits!!');
+        }
+
+          }); 
+    
+    
+          $(document).on('click', '.btn_remove', function(e){  
+            
+            var button_id = $(this).attr("id"); 
+               e.preventDefault();  
+               $('#row'+button_id+'').remove();
+               i--;   
+          });  
+    
+
+        });  
+
+    </script>
+
+    
+@endsection
